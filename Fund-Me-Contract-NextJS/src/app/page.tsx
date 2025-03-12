@@ -7,6 +7,8 @@ import { abi, contractAddress } from "./constants.js";
 export default function Home() {
   const [isConnectedText, setIsConnectedText] = useState("Connect Wallet");
   const [isConnected, setIsConnected] = useState(false);
+  const initialButtonStyle = "btn btn-primary border-2 border-primary";
+  const [connectBtnStyle, setConnectBtnStyle] = useState(initialButtonStyle);
   // const [signer, setSigner] = useState();
   const ethAmountRef = useRef<HTMLInputElement>(null);
   // created a reference for the input value
@@ -19,12 +21,15 @@ export default function Home() {
         // setSigner(connectedProvider.getSigner());
         setIsConnected(true);
         setIsConnectedText("Connected");
+        setConnectBtnStyle("btn border-2 border-primary text-secondary bg-opacity-0 hover:border-primary hover:bg-opacity-10 hover:bg-secondary");
       } catch (e) {
         console.log(e);
       }
     } else {
       setIsConnected(false);
       setIsConnectedText("Metamask not installed/connected");
+      setConnectBtnStyle("btn border-2 border-primary text-red-400 bg-opacity-0 hover:border-primary bg-opacity-10 bg-secondary");
+
     }
   }
 
@@ -84,24 +89,34 @@ export default function Home() {
       <div>
         <Header />
       </div>
-      <button className="btn" onClick={() => connect()}>
+      <div className="top mt-5 ml-11">
+      <button className={connectBtnStyle} onClick={() => connect()}>
         {isConnectedText}
       </button>
+      </div>
       {isConnected && (
         <>
-          <button className="btn" onClick={() => getBalance()}>
-            Get Balance
-          </button>
-          <input
-            type="number"
-            placeholder="ETH Amount"
-            className="input input-bordered"
-            ref={ethAmountRef}
-          ></input>
-          <button className="btn" onClick={() => fund()}>
-            Fund
-          </button>
-          <button className="btn" onClick={() => withdraw()}>Withdraw</button>
+          <div className="rounded-xl inset-shadow-sm inset-shadow-red-500 shadow-primary shadow-xl
+        gap-10 flex flex-wrap justify-center items-center h-auto pt-20 pb-20
+        fixed left-1/2 top-1/2 mt-[-80px] transform -translate-x-1/2 -translate-y-1/2">
+            <div className="flex gap-2 w-full justify-center">
+            <input
+                type="number"
+                placeholder="ETH Amount"
+                className="input input-bordered"
+                ref={ethAmountRef}
+            ></input>
+            <button className="btn" onClick={() => fund()}>
+              Fund
+            </button>
+            </div>
+            <button className="btn" onClick={() => getBalance()}>
+              Get Balance
+            </button>
+            <button className="btn" onClick={() => withdraw()}>
+              Withdraw
+            </button>
+          </div>
         </>
       )}
     </main>
