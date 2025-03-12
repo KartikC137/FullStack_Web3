@@ -12,14 +12,12 @@ const themes = [
   "corporate",
   "synthwave",
   "retro",
-  "cyberpunk",
   "valentine",
   "halloween",
   "garden",
   "forest",
   "aqua",
   "lofi",
-  "pastel",
   "fantasy",
   "wireframe",
   "black",
@@ -46,7 +44,7 @@ const ThemeChanger = () => {
 
   return (
     <div>
-      <select data-choose-theme className="rounded-md px-2 py-1">
+      <select data-choose-theme className="rounded-md px-2 py-1 border-2 border-base-content">
         {themes.map((theme) => (
           <option key={theme} value={theme}>
             {theme}

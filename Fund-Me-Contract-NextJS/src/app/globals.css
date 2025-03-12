@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-body {
+@config '../../tailwind.config.ts';
+
+@plugin "daisyui" {
+  themes: all;
 }
+
